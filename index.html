@@ -14,7 +14,6 @@
 
         html {
             scroll-behavior: smooth;
-            /* Prevents sticky header from covering content on anchor jump */
             scroll-padding-top: 80px; 
         }
 
@@ -23,17 +22,19 @@
             background: linear-gradient(135deg, #f5f0ff 0%, #e6d9ff 100%);
             color: #4a3668;
             line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            width: 100%;
         }
 
         /* --- Header & Nav --- */
         header {
             background: linear-gradient(135deg, #9b7bc7 0%, #c8b4e8 100%);
             color: white;
-            padding: 1rem 0;
+            padding: 0.8rem 0; /* Slightly tighter padding */
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
-            z-index: 1000; /* High z-index to stay on top */
+            z-index: 1000;
             width: 100%;
         }
 
@@ -45,13 +46,17 @@
             align-items: center;
             padding: 0 2rem;
             position: relative;
+            width: 100%;
         }
 
         .logo {
-            font-size: 1.5rem;
+            /* Dynamic font size: shrinks automatically on small screens */
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
             font-weight: bold;
             letter-spacing: 1px;
-            white-space: nowrap;
+            white-space: nowrap; /* Keeps it on one line usually */
+            flex-shrink: 1; 
+            margin-right: 10px;
         }
 
         nav ul {
@@ -82,17 +87,17 @@
             background: none;
             border: none;
             color: white;
-            font-size: 2rem; /* Larger icon */
+            font-size: 1.8rem;
             cursor: pointer;
-            padding: 0.5rem;
-            z-index: 1002; /* Highest priority to ensure clickability */
+            padding: 0.2rem; /* Reduced padding to fit tighter spaces */
+            z-index: 1002;
             position: relative;
         }
 
         /* --- Hero Section --- */
         .hero {
             text-align: center;
-            padding: 6rem 2rem 4rem;
+            padding: 6rem 1.5rem 4rem; /* Reduced side padding */
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -109,14 +114,17 @@
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            /* Clamps font size between 2rem and 3.5rem based on screen width */
+            font-size: clamp(2rem, 8vw, 3.5rem);
             color: #6b4c9a;
             margin-bottom: 0.5rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            word-wrap: break-word;
+            line-height: 1.2;
         }
 
         .hero .subtitle {
-            font-size: 1.5rem;
+            font-size: clamp(1.1rem, 4vw, 1.5rem);
             color: #7d5ba6;
             margin-bottom: 1rem;
             font-weight: 600;
@@ -129,6 +137,7 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
+            flex-wrap: wrap;
         }
 
         .hero p {
@@ -144,7 +153,7 @@
         .contact-info {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 1.5rem;
             margin-bottom: 2rem;
             flex-wrap: wrap;
         }
@@ -160,6 +169,7 @@
             padding: 0.5rem 1rem;
             border-radius: 20px;
             box-shadow: 0 2px 5px rgba(155, 123, 199, 0.1);
+            font-size: 0.95rem;
         }
 
         .contact-info a:hover {
@@ -180,6 +190,10 @@
             transition: all 0.3s;
             box-shadow: 0 4px 15px rgba(155, 123, 199, 0.4);
             margin: 0.5rem;
+            white-space: nowrap;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
         }
 
         .btn:hover {
@@ -192,10 +206,11 @@
             max-width: 1200px;
             margin: 4rem auto;
             padding: 2rem;
+            width: 100%;
         }
 
         h2 {
-            font-size: 2.5rem;
+            font-size: clamp(2rem, 5vw, 2.5rem);
             color: #6b4c9a;
             margin-bottom: 2rem;
             text-align: center;
@@ -245,14 +260,16 @@
         /* --- Experience --- */
         .experience-timeline {
             position: relative;
-            padding-left: 2rem;
+            padding-left: 0; /* Removed absolute padding for responsiveness */
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
         .experience-item {
             background: white;
             padding: 2rem;
             border-radius: 15px;
-            margin-bottom: 2rem;
             box-shadow: 0 5px 15px rgba(155, 123, 199, 0.2);
             border-left: 6px solid #9b7bc7;
         }
@@ -267,7 +284,7 @@
         /* --- Skills --- */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Smaller min-width */
             gap: 2rem;
             margin-top: 2rem;
         }
@@ -320,7 +337,7 @@
         /* --- Projects --- */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted min-width */
             gap: 2rem;
         }
 
@@ -365,6 +382,7 @@
             margin-top: auto;
             margin-bottom: 1rem;
             font-weight: 600;
+            word-break: break-all; /* Prevents long URLs breaking layout */
         }
 
         .project-tags {
@@ -472,11 +490,16 @@
             margin-top: 1rem;
         }
 
-        /* --- RESPONSIVE DESIGN & MOBILE MENU --- */
+        /* --- RESPONSIVE DESIGN --- */
+        
+        /* Tablet & Mobile Menu Activation */
         @media (max-width: 850px) {
-            /* Mobile Menu Config */
             .mobile-menu-btn {
                 display: block;
+            }
+
+            nav {
+                padding: 0 1.5rem;
             }
 
             nav ul {
@@ -484,7 +507,6 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                /* Solid background to prevent overlap issues */
                 background: #8f6ec2; 
                 border-top: 1px solid rgba(255,255,255,0.1);
                 flex-direction: column;
@@ -494,12 +516,11 @@
                 overflow: hidden;
                 transition: max-height 0.4s ease-out;
                 box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-                z-index: 1001; /* High z-index for dropdown */
+                z-index: 1001; 
             }
 
-            /* Class to open menu via JS */
             nav ul.active {
-                max-height: 600px; /* Increased to fit all links */
+                max-height: 800px; 
                 padding: 1rem 0;
             }
 
@@ -514,67 +535,68 @@
                 border-radius: 0;
                 border-bottom: 1px solid rgba(255,255,255,0.05);
             }
-
-            nav a:hover {
-                background: rgba(255,255,255,0.1);
-                transform: none;
-            }
-
-            /* Hero Adjustments */
-            .hero {
-                padding-top: 3rem;
-            }
             
-            .hero h1 {
-                font-size: 2.5rem;
-            }
+            .hero { padding-top: 3rem; }
         }
 
+        /* Main Mobile Adjustments (Phones) */
         @media (max-width: 600px) {
-            nav {
-                padding: 0 1rem;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero .subtitle {
-                font-size: 1.2rem;
-            }
-
-            .contact-info {
-                flex-direction: column;
-                align-items: stretch;
-                padding: 0 2rem;
+            /* Header & Nav */
+            nav { 
+                padding: 0 1rem; 
             }
             
-            .contact-info a {
-                justify-content: center;
+            .logo {
+                white-space: normal; /* Allow logo to wrap on very small screens */
+                line-height: 1.2;
             }
 
-            section {
-                padding: 1rem;
-                margin: 2rem auto;
+            /* Content Sections */
+            section { 
+                padding: 1rem; 
+                margin: 2rem auto; 
+            }
+            
+            .contact-info { 
+                flex-direction: column; 
+                padding: 0 1rem; 
+            }
+            
+            .contact-info a { 
+                justify-content: center; 
+                width: 100%;
             }
 
-            /* --- FIXED OVERLAP ISSUE HERE --- */
+            /* Cards & Boxes: Removing fixed heights/padding issues */
             .about-content, .education-section, .achievements-section, .contact-form {
                 padding: 1.5rem;
-                /* Explicitly removing limits to fix overlap */
                 height: auto; 
                 max-height: none; 
             }
-
-            .btn {
-                display: block;
-                width: 100%;
-                margin: 0.5rem 0;
+            
+            .education-item, .achievement-item {
+                padding: 1.2rem;
             }
 
-            .stats-grid {
-                grid-template-columns: 1fr;
+            /* Buttons */
+            .btn { 
+                display: block; 
+                width: 100%; 
+                margin: 0.5rem 0; 
             }
+            
+            /* Grids */
+            .stats-grid { grid-template-columns: 1fr; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Small Phone Fixes */
+        @media (max-width: 380px) {
+            .logo { font-size: 1.2rem; }
+            .mobile-menu-btn { font-size: 1.5rem; }
+            .hero h1 { font-size: 1.8rem; }
+            .contact-info a { font-size: 0.85rem; padding: 0.4rem 0.8rem; }
         }
     </style>
 </head>
@@ -598,8 +620,7 @@
     </header>
 
     <section id="home" class="hero">
-        <!-- Used a placeholder image for the preview. Replace src with your actual image file -->
-        <img src="imagee.jpg" alt="Sahil Maharjan" class="profile-image">
+        <img src="https://placehold.co/200x200/d8c7f0/6b4c9a?text=SM" alt="Sahil Maharjan" class="profile-image">
 
         <h1>Sahil Maharjan</h1>
         <p class="subtitle">Quality Assurance Engineer</p>
@@ -886,18 +907,25 @@
     <section id="contact">
         <h2>Get In Touch</h2>
         <div class="contact-form">
-            <form>
+            <form action="https://formsubmit.co/maharjansahil2@gmail.com" method="POST">
+                <!-- Honeypot to prevent spam -->
+                <input type="text" name="_honey" style="display:none">
+                
+                <!-- Redirect to the same page after submission -->
+                <input type="hidden" name="_next" value="https://yourportfolio.com/thanks.html">
+                <!-- Or just remove value to use default success page -->
+
                 <div class="form-group">
                     <label for="name">Your Name</label>
-                    <input type="text" id="name" placeholder="Enter your name">
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Your Email</label>
-                    <input type="email" id="email" placeholder="Enter your email">
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
                 </div>
                 <div class="form-group">
                     <label for="message">Message</label>
-                    <textarea id="message" placeholder="How can I help you?"></textarea>
+                    <textarea id="message" name="message" placeholder="How can I help you?" required></textarea>
                 </div>
                 <button type="submit" class="btn" style="width: 100%;">Send Message</button>
             </form>
