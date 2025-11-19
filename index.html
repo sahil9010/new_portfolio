@@ -5,10 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sahil Maharjan - QA Portfolio</title>
     <style>
+        /* --- Reset & Core --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            /* Prevents sticky header from covering content on anchor jump */
+            scroll-padding-top: 80px; 
         }
 
         body {
@@ -18,14 +25,16 @@
             line-height: 1.6;
         }
 
+        /* --- Header & Nav --- */
         header {
             background: linear-gradient(135deg, #9b7bc7 0%, #c8b4e8 100%);
             color: white;
-            padding: 2rem 0;
+            padding: 1rem 0;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000; /* High z-index to stay on top */
+            width: 100%;
         }
 
         nav {
@@ -35,18 +44,21 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 2rem;
+            position: relative;
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: bold;
             letter-spacing: 1px;
+            white-space: nowrap;
         }
 
         nav ul {
             list-style: none;
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
+            align-items: center;
         }
 
         nav a {
@@ -54,8 +66,9 @@
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 0.8rem;
             border-radius: 8px;
+            font-size: 0.95rem;
         }
 
         nav a:hover {
@@ -63,16 +76,20 @@
             transform: translateY(-2px);
         }
 
+        /* Mobile Menu Button */
         .mobile-menu-btn {
             display: none;
             background: none;
             border: none;
             color: white;
-            font-size: 1.8rem;
+            font-size: 2rem; /* Larger icon */
             cursor: pointer;
             padding: 0.5rem;
+            z-index: 1002; /* Highest priority to ensure clickability */
+            position: relative;
         }
 
+        /* --- Hero Section --- */
         .hero {
             text-align: center;
             padding: 6rem 2rem 4rem;
@@ -88,12 +105,7 @@
             border: 6px solid white;
             box-shadow: 0 10px 30px rgba(155, 123, 199, 0.4);
             object-fit: cover;
-            background: linear-gradient(135deg, #d8c7f0 0%, #c8b4e8 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: white;
+            background: white;
         }
 
         .hero h1 {
@@ -128,6 +140,7 @@
             margin-right: auto;
         }
 
+        /* --- Contact Info Bar --- */
         .contact-info {
             display: flex;
             justify-content: center;
@@ -143,13 +156,19 @@
             align-items: center;
             gap: 0.5rem;
             transition: all 0.3s;
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(155, 123, 199, 0.1);
         }
 
         .contact-info a:hover {
             color: #9b7bc7;
             transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(155, 123, 199, 0.2);
         }
 
+        /* --- Buttons --- */
         .btn {
             display: inline-block;
             padding: 1rem 2.5rem;
@@ -168,6 +187,7 @@
             box-shadow: 0 6px 20px rgba(155, 123, 199, 0.6);
         }
 
+        /* --- Sections General --- */
         section {
             max-width: 1200px;
             margin: 4rem auto;
@@ -179,8 +199,20 @@
             color: #6b4c9a;
             margin-bottom: 2rem;
             text-align: center;
+            position: relative;
         }
 
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #9b7bc7;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* --- About --- */
         .about-content {
             background: white;
             padding: 3rem;
@@ -210,6 +242,7 @@
             margin-bottom: 0.5rem;
         }
 
+        /* --- Experience --- */
         .experience-timeline {
             position: relative;
             padding-left: 2rem;
@@ -221,21 +254,17 @@
             border-radius: 15px;
             margin-bottom: 2rem;
             box-shadow: 0 5px 15px rgba(155, 123, 199, 0.2);
-            border-left: 4px solid #9b7bc7;
-            position: relative;
-        }
-
-        .experience-item h3 {
-            color: #6b4c9a;
-            margin-bottom: 0.5rem;
+            border-left: 6px solid #9b7bc7;
         }
 
         .experience-item .company {
             color: #9b7bc7;
             font-weight: 600;
             margin-bottom: 1rem;
+            display: block;
         }
 
+        /* --- Skills --- */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -249,7 +278,7 @@
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(155, 123, 199, 0.2);
             transition: all 0.3s;
-            border-left: 4px solid #9b7bc7;
+            border-top: 4px solid #9b7bc7;
         }
 
         .skill-card:hover {
@@ -265,13 +294,8 @@
             gap: 0.5rem;
         }
 
-        .skill-icon {
-            font-size: 1.5rem;
-        }
-
         .skill-list {
             list-style: none;
-            margin-top: 1rem;
         }
 
         .skill-list li {
@@ -280,6 +304,11 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            border-bottom: 1px solid #f0e6ff;
+        }
+
+        .skill-list li:last-child {
+            border-bottom: none;
         }
 
         .skill-list li:before {
@@ -288,9 +317,10 @@
             font-weight: bold;
         }
 
+        /* --- Projects --- */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
 
@@ -300,6 +330,9 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(155, 123, 199, 0.2);
             transition: all 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         .project-card:hover {
@@ -309,21 +342,19 @@
 
         .project-header {
             width: 100%;
-            height: 100px;
+            height: 120px;
             background: linear-gradient(135deg, #d8c7f0 0%, #c8b4e8 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
+            font-size: 3rem;
         }
 
         .project-content {
             padding: 1.5rem;
-        }
-
-        .project-content h3 {
-            color: #6b4c9a;
-            margin-bottom: 0.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .project-link {
@@ -331,11 +362,9 @@
             text-decoration: none;
             font-size: 0.9rem;
             display: inline-block;
-            margin-top: 0.5rem;
-        }
-
-        .project-link:hover {
-            text-decoration: underline;
+            margin-top: auto;
+            margin-bottom: 1rem;
+            font-weight: 600;
         }
 
         .project-tags {
@@ -346,72 +375,28 @@
         }
 
         .tag {
-            background: #e6d9ff;
+            background: #f0e6ff;
             color: #6b4c9a;
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 500;
         }
 
-        .education-section {
+        /* --- Education & Achievements --- */
+        .education-section, .achievements-section {
             background: white;
             padding: 3rem;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(155, 123, 199, 0.2);
-            max-height: 600px;
-            overflow-y: auto;
         }
-
-        .education-section::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .education-section::-webkit-scrollbar-track {
-            background: #f5f0ff;
-            border-radius: 10px;
-        }
-
-        .education-section::-webkit-scrollbar-thumb {
-            background: #9b7bc7;
-            border-radius: 10px;
-        }
-
-        .education-section::-webkit-scrollbar-thumb:hover {
-            background: #7d5ba6;
-        }
-
-        .education-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
+        
         .education-item {
             padding: 2rem;
-            background: linear-gradient(135deg, #f5f0ff 0%, #e6d9ff 100%);
+            background: #f5f0ff;
             border-radius: 15px;
             border-left: 4px solid #9b7bc7;
-            transition: all 0.3s;
-            height: 100%;
-        }
-
-        .education-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(155, 123, 199, 0.3);
-        }
-
-        .education-item h3 {
-            color: #6b4c9a;
-            margin-bottom: 0.8rem;
-            font-size: 1.4rem;
-        }
-
-        .education-item .school {
-            color: #9b7bc7;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
         }
 
         .education-item .date {
@@ -425,13 +410,6 @@
             border-radius: 20px;
         }
 
-        .achievements-section {
-            background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(155, 123, 199, 0.2);
-        }
-
         .achievement-item {
             padding: 1.5rem;
             background: #f5f0ff;
@@ -440,11 +418,7 @@
             margin-bottom: 1.5rem;
         }
 
-        .achievement-item h4 {
-            color: #6b4c9a;
-            margin-bottom: 0.5rem;
-        }
-
+        /* --- Contact Form --- */
         .contact-form {
             background: white;
             padding: 3rem;
@@ -472,24 +446,22 @@
             border-radius: 10px;
             font-family: inherit;
             transition: all 0.3s;
+            background: #faf7ff;
         }
 
         input:focus, textarea:focus {
             outline: none;
             border-color: #9b7bc7;
             box-shadow: 0 0 0 3px rgba(155, 123, 199, 0.1);
+            background: white;
         }
 
-        textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-
+        /* --- Footer --- */
         footer {
             background: linear-gradient(135deg, #6b4c9a 0%, #9b7bc7 100%);
             color: white;
             text-align: center;
-            padding: 2rem;
+            padding: 3rem 2rem;
             margin-top: 4rem;
         }
 
@@ -500,40 +472,35 @@
             margin-top: 1rem;
         }
 
-        .social-links a {
-            color: white;
-            font-size: 1.5rem;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-
-        .social-links a:hover {
-            transform: scale(1.2);
-            color: #e6d9ff;
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                flex-wrap: wrap;
-            }
-
+        /* --- RESPONSIVE DESIGN & MOBILE MENU --- */
+        @media (max-width: 850px) {
+            /* Mobile Menu Config */
             .mobile-menu-btn {
                 display: block;
             }
 
             nav ul {
-                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
                 width: 100%;
+                /* Solid background to prevent overlap issues */
+                background: #8f6ec2; 
+                border-top: 1px solid rgba(255,255,255,0.1);
                 flex-direction: column;
+                padding: 0;
                 gap: 0;
-                margin-top: 1rem;
-                background: rgba(107, 76, 154, 0.95);
-                border-radius: 10px;
-                padding: 1rem 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease-out;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+                z-index: 1001; /* High z-index for dropdown */
             }
 
+            /* Class to open menu via JS */
             nav ul.active {
-                display: flex;
+                max-height: 600px; /* Increased to fit all links */
+                padding: 1rem 0;
             }
 
             nav ul li {
@@ -543,16 +510,29 @@
 
             nav a {
                 display: block;
-                padding: 1rem;
+                padding: 1.2rem;
+                border-radius: 0;
+                border-bottom: 1px solid rgba(255,255,255,0.05);
             }
 
+            nav a:hover {
+                background: rgba(255,255,255,0.1);
+                transform: none;
+            }
+
+            /* Hero Adjustments */
             .hero {
-                padding: 3rem 1.5rem;
+                padding-top: 3rem;
             }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
 
-            .profile-image {
-                width: 150px;
-                height: 150px;
+        @media (max-width: 600px) {
+            nav {
+                padding: 0 1rem;
             }
 
             .hero h1 {
@@ -563,21 +543,14 @@
                 font-size: 1.2rem;
             }
 
-            .hero p {
-                font-size: 1rem;
-            }
-
             .contact-info {
                 flex-direction: column;
-                gap: 1rem;
+                align-items: stretch;
+                padding: 0 2rem;
             }
-
-            .btn {
-                padding: 0.8rem 1.5rem;
-                font-size: 0.9rem;
-                display: block;
-                margin: 0.5rem auto;
-                max-width: 250px;
+            
+            .contact-info a {
+                justify-content: center;
             }
 
             section {
@@ -585,78 +558,22 @@
                 margin: 2rem auto;
             }
 
-            h2 {
-                font-size: 1.8rem;
-            }
-
-            .about-content, .education-section, .achievements-section {
+            /* --- FIXED OVERLAP ISSUE HERE --- */
+            .about-content, .education-section, .achievements-section, .contact-form {
                 padding: 1.5rem;
-                max-height: 500px;
+                /* Explicitly removing limits to fix overlap */
+                height: auto; 
+                max-height: none; 
             }
 
-            .education-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .education-item {
-                padding: 1.5rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-            }
-
-            .stat-card {
-                padding: 1.5rem 1rem;
-            }
-
-            .stat-number {
-                font-size: 2rem;
-            }
-
-            .skills-grid, .projects-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .skill-card, .project-card {
-                padding: 1.5rem;
-            }
-
-            .contact-form {
-                padding: 1.5rem;
-            }
-
-            .social-links {
-                gap: 1rem;
-            }
-
-            .social-links a {
-                font-size: 1.3rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 1.6rem;
-            }
-
-            .hero .subtitle {
-                font-size: 1rem;
-            }
-
-            .logo {
-                font-size: 1.4rem;
+            .btn {
+                display: block;
+                width: 100%;
+                margin: 0.5rem 0;
             }
 
             .stats-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .project-tags {
-                flex-direction: column;
-                align-items: flex-start;
             }
         }
     </style>
@@ -665,7 +582,9 @@
     <header>
         <nav>
             <div class="logo">Sahil Maharjan</div>
-            <button class="mobile-menu-btn" id="menuToggle">☰</button>
+            <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle Navigation">
+                ☰
+            </button>
             <ul id="navMenu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -679,9 +598,9 @@
     </header>
 
     <section id="home" class="hero">
+        <!-- Used a placeholder image for the preview. Replace src with your actual image file -->
         <img src="imagee.jpg" alt="Sahil Maharjan" class="profile-image">
 
-        
         <h1>Sahil Maharjan</h1>
         <p class="subtitle">Quality Assurance Engineer</p>
         <p class="location">📍 Sankhamul, Lalitpur, Nepal</p>
@@ -689,9 +608,7 @@
         <div class="contact-info">
             <a href="tel:9851310065">📞 9851310065</a>
             <a href="mailto:maharjansahil2@gmail.com">✉️ maharjansahil2@gmail.com</a>
-            <a href="https://www.linkedin.com/in/" target="_blank">💼 www.linkedin.com/in/sahil-maharjan-z
-
-</a>
+            <a href="https://www.linkedin.com/in/sahil-maharjan-z" target="_blank">💼 LinkedIn Profile</a>
         </div>
         
         <p>Entry-level QA professional with a keen eye for detail and a strong understanding of software testing principles. Skilled in manual testing, bug tracking, and learning automation tools to ensure high-quality software delivery.</p>
@@ -719,7 +636,7 @@
                 <div>Course Attendance</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">Multiple</div>
+                <div class="stat-number">10+</div>
                 <div>Testing Tools</div>
             </div>
             <div class="stat-card">
@@ -734,8 +651,8 @@
         <div class="experience-timeline">
             <div class="experience-item">
                 <h3>Quality Assurance</h3>
-                <div class="company">Vrit Technologies - Sankhamul</div>
-                <ul style="margin-left: 1.5rem; color: #6b4c9a;">
+                <span class="company">Vrit Technologies - Sankhamul</span>
+                <ul style="margin-left: 1.5rem; color: #6b4c9a; margin-top: 0.5rem;">
                     <li>Conduct software testing to ensure product quality and functionality across various platforms</li>
                     <li>Develop and execute test cases, identify bugs, and work closely with developers to resolve issues</li>
                     <li>Maintain detailed documentation of testing procedures and results</li>
@@ -822,11 +739,11 @@
                 <div class="project-header">📧</div>
                 <div class="project-content">
                     <h3>Sanitize Email</h3>
-                    <p>Performed comprehensive functional, security, and payment validation testing for a SaaS platform that verifies email validity through SMTP, DMARC, DNS, MX, and format checks. Executed tests across 20 different platforms.</p>
+                    <p>Performed comprehensive functional, security, and payment validation testing for a SaaS platform that verifies email validity through SMTP, DMARC, DNS, MX, and format checks.</p>
                     <a href="https://sanitizeemail.com" target="_blank" class="project-link">🔗 sanitizeemail.com</a>
                     <div class="project-tags">
-                        <span class="tag">Functional Testing</span>
-                        <span class="tag">Security Testing</span>
+                        <span class="tag">Functional</span>
+                        <span class="tag">Security</span>
                         <span class="tag">Multi-Platform</span>
                     </div>
                 </div>
@@ -836,7 +753,7 @@
                 <div class="project-header">💼</div>
                 <div class="project-content">
                     <h3>Vrit Technologies</h3>
-                    <p>Performed comprehensive manual, functional, and UI testing across the full development lifecycle. Developed automation scripts and conducted load testing using Apache JMeter.</p>
+                    <p>Performed comprehensive manual, functional, and UI testing across the full development lifecycle. Developed automation scripts and conducted load testing using JMeter.</p>
                     <a href="https://vrittechnologies.com" target="_blank" class="project-link">🔗 vrittechnologies.com</a>
                     <div class="project-tags">
                         <span class="tag">Automation</span>
@@ -850,12 +767,12 @@
                 <div class="project-header">📚</div>
                 <div class="project-content">
                     <h3>Skillshikshya</h3>
-                    <p>Performed comprehensive testing across web and CRM platforms including dependency, regression, manual, UI, functional, smoke, and automation testing. Collaborated with cross-functional teams.</p>
+                    <p>Performed comprehensive testing across web and CRM platforms including dependency, regression, manual, UI, functional, smoke, and automation testing.</p>
                     <a href="https://skillshikshya.com" target="_blank" class="project-link">🔗 skillshikshya.com</a>
                     <div class="project-tags">
                         <span class="tag">CRM Testing</span>
                         <span class="tag">Automation</span>
-                        <span class="tag">Cross-functional</span>
+                        <span class="tag">Regression</span>
                     </div>
                 </div>
             </div>
@@ -863,8 +780,8 @@
             <div class="project-card">
                 <div class="project-header">🌍</div>
                 <div class="project-content">
-                    <h3>AbrodSathi/The Authorized Partner</h3>
-                    <p>Completed comprehensive testing validating functional, logical, and edge cases in every update.</p>
+                    <h3>AbrodSathi</h3>
+                    <p>Completed comprehensive testing validating functional, logical, and edge cases in every update for "The Authorized Partner".</p>
                     <a href="https://abroadsathi.com" target="_blank" class="project-link">🔗 abroadsathi.com</a>
                     <div class="project-tags">
                         <span class="tag">Edge Cases</span>
@@ -874,15 +791,15 @@
             </div>
             
             <div class="project-card">
-                <div class="project-header">💼</div>
+                <div class="project-header">🔎</div>
                 <div class="project-content">
                     <h3>Vritjobs</h3>
-                    <p>Led end-to-end QA strategy with automation, API testing (Postman), and performance testing (JMeter) to boost software reliability and efficiency.</p>
+                    <p>Led end-to-end QA strategy with automation, API testing (Postman), and performance testing (JMeter) to boost software reliability.</p>
                     <a href="https://vritjobs.com" target="_blank" class="project-link">🔗 vritjobs.com</a>
                     <div class="project-tags">
                         <span class="tag">API Testing</span>
                         <span class="tag">Performance</span>
-                        <span class="tag">End-to-End QA</span>
+                        <span class="tag">End-to-End</span>
                     </div>
                 </div>
             </div>
@@ -899,25 +816,11 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="project-card">
-                <div class="project-header">👥</div>
-                <div class="project-content">
-                    <h3>Intense Teams</h3>
-                    <p>Conducted manual UI testing across web, mobile, and desktop platforms to ensure design consistency, responsiveness, and optimal user experience.</p>
-                    <a href="https://intense.team" target="_blank" class="project-link">🔗 intense.team</a>
-                    <div class="project-tags">
-                        <span class="tag">UI Testing</span>
-                        <span class="tag">Cross-Platform</span>
-                        <span class="tag">Responsive</span>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
     <section id="education">
-        <h2>Education</h2>
+        <h2>Education & Training</h2>
         <div class="education-section">
             <div class="education-item">
                 <h3>Bachelor in Computer Application</h3>
@@ -925,13 +828,7 @@
                 <div class="date">Nov 2019 - Jan 2025</div>
                 <p style="margin-top: 0.5rem;">A four-year undergraduate program focused on computer science, software development, and IT fundamentals. Covered core subjects such as programming (C, Java, Python), database management, web development, networking, and data structures.</p>
             </div>
-        </div>
-    </section>
-
-    <section id="education">
-        <h2>Trainings</h2>
-        <div class="education-section">
-            <div class="education-item">
+            <div class="education-item" style="margin-top: 1rem;">
                 <h3>Quality Assurance Diploma</h3>
                 <div class="school">Skill Shikshya, Kathmandu</div>
                 <div class="date">Dec 2024 - Mar 2025</div>
@@ -983,5 +880,71 @@
                     <p style="color: #7d5ba6;">Proficient</p>
                 </div>
             </div>
-        
-                
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Get In Touch</h2>
+        <div class="contact-form">
+            <form>
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="How can I help you?"></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Sahil Maharjan. All Rights Reserved.</p>
+        <div class="social-links">
+            <a href="#">Linked In</a>
+            <a href="mailto:maharjansahil2@gmail.com">Email</a>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for Mobile Menu Toggle
+        const menuBtn = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        const navLinks = document.querySelectorAll('#navMenu a');
+
+        // Toggle menu when hamburger button is clicked
+        menuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            
+            // Optional: Change icon based on state
+            if(navMenu.classList.contains('active')) {
+                menuBtn.innerHTML = '✕'; // Close icon
+            } else {
+                menuBtn.innerHTML = '☰'; // Hamburger icon
+            }
+        });
+
+        // Close menu when a link is clicked
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuBtn.innerHTML = '☰';
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !menuBtn.contains(e.target) && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                menuBtn.innerHTML = '☰';
+            }
+        });
+    </script>
+</body>
+</html>
